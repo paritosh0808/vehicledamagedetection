@@ -173,12 +173,28 @@ def evaluate(model, data_loader, device, num_classes):
                 images = list(image.to(device) for image in images)
                 targets = [{k: v.to(device) for k, v in t.items()} for t in targets]
 
-                loss_dict = model(images, targets)
-                losses = sum(loss for loss in loss_dict.values())
+                output = model(images)
+                
+                # Handle both list and dict return types
+                if isinstance(output, list):
+                    # During evaluation, the model returns a list of dicts
+                    losses = sum(sum(loss for loss in det.values()) for det in output)
+                elif isinstance(output, dict):
+                    # During training, the model returns a dict of losses
+                    losses = sum(loss for loss in output.values())
+                else:
+                    raise ValueError(f"Unexpected output type from model: {type(output)}")
+
                 total_loss += losses.item()
+                
+                if i % 10 == 0:
+                    logging.info(f"Validation Batch {i+1}/{len(data_loader)}, Loss: {losses.item():.4f}")
+                    
             except Exception as e:
                 logging.error(f"Error in validation batch {i}: {str(e)}")
                 logging.error(f"Traceback: {traceback.format_exc()}")
+                logging.error(f"Output type: {type(output)}")
+                logging.error(f"Output content: {output}")
                 continue
 
     return total_loss / len(data_loader)
