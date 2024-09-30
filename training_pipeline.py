@@ -50,19 +50,18 @@ def train_one_epoch(model, optimizer, data_loader, device, epoch, writer):
 
 def main():
     # Configuration
-    train_img_dir = '/home/thomas/projects/other/vehicledamage/vehicle_damage_detection_dataset/images/train'
-    train_ann_file = '/home/thomas/projects/other/vehicledamage/vehicle_damage_detection_dataset/annotations/instances_train.json'
-    val_img_dir = '/home/thomas/projects/other/vehicledamage/vehicle_damage_detection_dataset/images/val'
-    val_ann_file = '/home/thomas/projects/other/vehicledamage/vehicle_damage_detection_dataset/annotations/instances_val.json'
-
+    train_img_dir = os.getenv('TRAIN_IMG_DIR')
+    train_ann_file = os.getenv('TRAIN_ANN_FILE')
+    val_img_dir = os.getenv('VAL_IMG_DIR')
+    val_ann_file = os.getenv('VAL_ANN_FILE')
 
     num_classes = 8  
-    num_epochs = 50
-    batch_size = 4  # Reduced batch size due to potential memory constraints
-    learning_rate = 0.005
-    num_train_images = 1000
+    num_epochs = int(os.getenv('NUM_EPOCHS', '50'))
+    batch_size = int(os.getenv('BATCH_SIZE', '4'))
+    learning_rate = float(os.getenv('LEARNING_RATE', '0.005'))
+    num_train_images = int(os.getenv('NUM_TRAIN_IMAGES', '1000'))
 
-    writer = SummaryWriter('runs/vehicle_damage_detection')
+    writer = SummaryWriter(os.getenv('TENSORBOARD_LOG_DIR', 'runs/vehicle_damage_detection'))
 
     
     # Device configuration
@@ -92,7 +91,7 @@ def main():
     optimizer = optim.SGD(params, lr=learning_rate, momentum=0.9, weight_decay=0.0005)
 
 
-    checkpoint_path = 'best_vehicle_damage_model.pth'
+    checkpoint_path = os.getenv('CHECKPOINT_PATH', 'best_vehicle_damage_model.pth')
     start_epoch = 0
     if os.path.exists(checkpoint_path):
         print(f"Loading checkpoint from {checkpoint_path}")
@@ -134,7 +133,7 @@ def main():
 
     
     # Save the model
-    torch.save(model.state_dict(), 'vehicle_damage_model.pth')
+    torch.save(model.state_dict(), os.getenv('FINAL_MODEL_PATH', 'vehicle_damage_model.pth'))
 
 if __name__ == '__main__':
     main()
