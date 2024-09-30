@@ -17,6 +17,9 @@ torchvision = "^0.19.1"
 torchmetrics = "^1.4.2"
 yolov5 = "^7.0.13"
 huggingface-hub = "^0.25.1"
+uvicorn = "^0.31.0"
+fastapi = "^0.115.0"
+python-multipart = "^0.0.12"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.5"
