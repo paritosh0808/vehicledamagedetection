@@ -125,7 +125,3 @@ poetry run tensorboard --logdir=runs --port=6007
 
 ![alt text](/inference_1.png)
 ![alt text](/inference_2.png)
-
-## License
-
-[Specify your license here, e.g., MIT License, Apache 2.0, etc.]
