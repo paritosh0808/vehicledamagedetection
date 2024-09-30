@@ -125,3 +125,43 @@ poetry run tensorboard --logdir=runs --port=6007
 
 ![alt text](/inference_1.png)
 ![alt text](/inference_2.png)
+
+
+## Docker Deployment
+
+To deploy the model using Docker and FastAPI:
+
+1. Build the Docker image:
+   ```bash
+   docker build -t vehicle-damage-detection .
+   ```
+
+2. Run the Docker container:
+   ```bash
+   docker run -p 80:80 vehicle-damage-detection
+   ```
+
+3. The FastAPI endpoint will now be available at `http://localhost/predict`.
+
+You can test the endpoint using the swagger page at `http://localhost/docs` or an API testing tool. For example:
+
+```bash
+curl -X POST -F "file=@path_to_your_image.jpg" http://localhost/predict --output prediction.jpg
+```
+
+This will send the image to the endpoint and save the result as `prediction.jpg`.
+
+## FastAPI Endpoint
+
+The FastAPI endpoint provides the following functionality:
+
+- Endpoint: POST `/predict`
+- Input: An image file
+- Output: The input image with bounding boxes drawn around detected vehicle damage
+
+The endpoint performs the following steps:
+1. Receives an uploaded image
+2. Preprocesses the image
+3. Runs the damage detection model
+4. Draws bounding boxes on the image for detected damage
+5. Returns the annotated image
