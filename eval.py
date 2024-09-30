@@ -6,7 +6,7 @@ from collections import defaultdict
 from dataset_class import VehicleDamageDataset
 from training_pipeline import get_model
 from torchvision import transforms
-
+import os
 
 def compute_iou(box1, box2):
     # box format: [x1, y1, x2, y2]
@@ -134,8 +134,8 @@ def evaluate_model(model, data_loader, device, iou_threshold=0.5):
 
 
 def main():
-    test_img_dir = '/home/thomas/projects/other/vehicledamage/vehicle_damage_detection_dataset/images/val'
-    test_ann_file = '/home/thomas/projects/other/vehicledamage/vehicle_damage_detection_dataset/annotations/instances_val.json'
+    test_img_dir = os.getenv('TEST_IMG_DIR')
+    test_ann_file = os.getenv('TEST_ANN_FILE')
 
     num_classes = 8
 
@@ -146,7 +146,7 @@ def main():
     model.to(device)
 
     # Load the trained model
-    checkpoint = torch.load('best_vehicle_damage_model.pth')
+    checkpoint = torch.load(os.getenv('FINAL_MODEL_PATH', 'vehicle_damage_model.pth'))
     model.load_state_dict(checkpoint)
     model.to(device)
 
