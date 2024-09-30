@@ -117,16 +117,6 @@ If port 6006 is already in use, you can specify a different port:
 poetry run tensorboard --logdir=runs --port=6007
 ```
 
-## Training Curve
-
-![alt text](/training_loss.png)
-
-## Example predictions
-
-![alt text](/inference_1.png)
-![alt text](/inference_2.png)
-
-
 ## Docker Deployment
 
 To deploy the model using Docker and FastAPI:
@@ -165,3 +155,13 @@ The endpoint performs the following steps:
 3. Runs the damage detection model
 4. Draws bounding boxes on the image for detected damage
 5. Returns the annotated image
+
+
+## Training Curve
+
+![alt text](/training_loss.png)
+
+## Example predictions
+
+![alt text](/inference_1.png)
+![alt text](/inference_2.png)
