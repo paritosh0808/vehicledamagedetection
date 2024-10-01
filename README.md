@@ -88,11 +88,29 @@ The training script (`train.py`) does the following:
 
 1. Loads the dataset using the custom `VehicleDamageDataset` class.
 2. Initializes the Faster R-CNN model with a ResNet50 backbone.
-3. Trains the model for a specified number of epochs. (30 used)
+3. Trains the model for a specified number of epochs.
 4. Saves the best model based on validation accuracy.
 5. Logs training progress and metrics using TensorBoard.
 
 You can modify training parameters in the `.env` file.
+
+
+## Training and Model Choices
+
+This project uses Faster R-CNN with pretrained weights due to its:
+
+- High accuracy in detecting and classifying multiple objects
+- Ability to handle objects of various scales (important for different types of vehicle damage)
+- Flexibility in backbone choice for performance tuning
+
+Faster R-CNN's balance of speed and accuracy makes it well-suited for the nuanced task of vehicle damage detection, where precise localization and classification of various damage types is crucial.
+
+
+- To speed up the training process and hardware constraints 1000 images were used for training with a batch size of 4. 
+- Improvements can be made by using techniques such as data augmentation as this is a small dataset. Also using a dataset with higher resolution images can improve performance
+
+The trained model can be downloaded from here: https://drive.google.com/file/d/1a_VaybVFaZgh45ETkX0KcTGpzQ8akPm9/view?usp=sharing
+
 
 ## Evaluation
 
