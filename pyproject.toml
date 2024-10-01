@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "vehicledamagedetection"
+version = "0.1.0"
+description = ""
+authors = ["Paritosh Kapadia <paritosh.kapadia@pegamento.nl>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+matplotlib = "^3.4.3"
+tqdm = "^4.62.3"
+numpy = "^1.21.2"
+Pillow = "^8.3.2"
+pycocotools = "^2.0.2"
+torch = "^2.4.1"
+torchvision = "^0.19.1"
+torchmetrics = "^1.4.2"
+yolov5 = "^7.0.13"
+huggingface-hub = "^0.25.1"
+uvicorn = "^0.31.0"
+fastapi = "^0.115.0"
+python-multipart = "^0.0.12"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.5"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
