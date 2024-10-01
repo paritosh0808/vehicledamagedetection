@@ -126,13 +126,13 @@ To visualize training progress and results:
 
 1. Start TensorBoard:
    ```bash
-   poetry run tensorboard --logdir=runs --port=6006
+   tensorboard --logdir=runs --port=6006
    ```
 2. Open a web browser and go to `http://localhost:6006`.
 
 If port 6006 is already in use, you can specify a different port:
 ```bash
-poetry run tensorboard --logdir=runs --port=6007
+tensorboard --logdir=runs --port=6007
 ```
 
 ## Docker Deployment
