@@ -73,18 +73,18 @@ vehicle-damage-detection/
 To train the model:
 
 ```bash
-poetry run python vehicledamagedetection/train.py
+python vehicledamagedetection/training_pipeline.py
 ```
 
 To evaluate the model:
 
 ```bash
-poetry run python vehicledamagedetection/eval.py
+python vehicledamagedetection/eval.py
 ```
 
 ## Training
 
-The training script (`train.py`) does the following:
+The training script (`training_pipeline.py`) does the following:
 
 1. Loads the dataset using the custom `VehicleDamageDataset` class.
 2. Initializes the Faster R-CNN model with a ResNet50 backbone.
